@@ -412,7 +412,7 @@ function App() {
                 <input placeholder="Название" value={topicForm.title} onChange={(e) => setTopicForm({ ...topicForm, title: e.target.value })} />
                 <textarea rows="4" placeholder="Описание" value={topicForm.content} onChange={(e) => setTopicForm({ ...topicForm, content: e.target.value })} />
                 <input type="file" multiple onChange={(e) => setTopicForm({ ...topicForm, files: e.target.files })} />
-                <button type="submit" disabled={loading}>Создать тред</button>
+                <button type="submit" disabled={loading}>Опубликовать</button>
               </form>
             )}
           </section>
