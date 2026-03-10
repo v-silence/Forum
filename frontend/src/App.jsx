@@ -289,8 +289,8 @@ function App() {
       <main className="dashboard">
         <section className="panel auth-panel">
           <div className="panel-header">
-            <h2>Access</h2>
-            {session.user && <button className="ghost-button" onClick={session.logout}>Sign out</button>}
+            <h2>Авторизация</h2>
+            {session.user && <button className="ghost-button" onClick={session.logout}>Выйти</button>}
           </div>
           {session.user ? (
             <div className="user-card">
@@ -327,7 +327,7 @@ function App() {
           <section className="panel forum-panel">
             <div className="panel-header">
               <h2>Форум</h2>
-              <span>{topics.length} Треды</span>
+              <span>{topics.length} posts</span>
             </div>
             <div className="panel-tools">
               <input
@@ -342,18 +342,7 @@ function App() {
                   <button key={topic.id} className={`list-item ${selectedTopicId === topic.id ? 'selected' : ''}`} onClick={() => setSelectedTopicId(topic.id)}>
                     <div className="item-header">
                       <strong>{topic.title}</strong>
-                      {canModerate && (
-                        <button
-                          type="button"
-                          className="danger-button"
-                          onClick={(event) => {
-                            event.stopPropagation()
-                            handleDeleteTopic(topic.id)
-                          }}
-                        >
-                          Удалить
-                        </button>
-                      )}
+                    
                     </div>
                     <span>{topic.author.username}</span>
                     <small>{new Date(topic.createdAt).toLocaleString()}</small>
@@ -435,18 +424,6 @@ function App() {
                   <button key={item.id} className={`list-item ${selectedNewsId === item.id ? 'selected' : ''}`} onClick={() => setSelectedNewsId(item.id)}>
                     <div className="item-header">
                       <strong>{item.title}</strong>
-                      {canModerate && (
-                        <button
-                          type="button"
-                          className="danger-button"
-                          onClick={(event) => {
-                            event.stopPropagation()
-                            handleDeleteNews(item.id)
-                          }}
-                        >
-                          Удалить
-                        </button>
-                      )}
                     </div>
                     <span>{item.author.username}</span>
                     <small>{new Date(item.createdAt).toLocaleString()}</small>
@@ -462,12 +439,12 @@ function App() {
                         <h3>{newsDetail.title}</h3>
                         {canModerate && (
                           <button type="button" className="danger-button" onClick={() => handleDeleteNews(newsDetail.id)}>
-                            Delete news
+                            Удалить
                           </button>
                         )}
                       </div>
                       <p>{newsDetail.content}</p>
-                      <small>Published by: {newsDetail.author.username}</small>
+                      <small>Опубликовано пользователем: {newsDetail.author.username}</small>
                     </div>
                     <div className="comment-box">
                       {newsDetail.comments.map((comment) => (
@@ -495,7 +472,7 @@ function App() {
             </div>
             {session.user && canCreateNews && (
               <form className="stack-form top-border" onSubmit={handleNewsSubmit}>
-                <h3>Publish news</h3>
+                <h3>Публикация новостей</h3>
                 <input placeholder="Заголовок новости" value={newsForm.title} onChange={(e) => setNewsForm({ ...newsForm, title: e.target.value })} />
                 <textarea rows="4" placeholder="Основной текст" value={newsForm.content} onChange={(e) => setNewsForm({ ...newsForm, content: e.target.value })} />
                 <button type="submit" disabled={loading}>Опубликовать</button>
